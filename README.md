@@ -14,6 +14,12 @@ I elected to pull stock ticker data from Polygon.io and build a dashboard that p
 
 # The Output
 
+# The Process
+## Data sourcing
+## Data ingestion
+## Building a pipeline in Glue + ETL
+## Designing a dashboard
+
 # Next Steps
 - My immediate next step will be to index the daily variance of the data, so as to not have the seemingly outlier performance shown in the above screenshot (exhibited by NVDA)
 - A second step will be to add in some additional comparison points - a sample of potentially more volatile investments like crypto assets and a few of the larger indexes (SPY, NDAQ)
