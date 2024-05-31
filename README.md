@@ -16,8 +16,14 @@ I elected to pull stock ticker data from Polygon.io and build a dashboard that p
 
 # The Process
 ## Data sourcing
+I decided to use the API from Polygon IO
 ## Data ingestion
+The first step was to build a Lambda function that would dump data into a Kinesis firehose. The firehose dumped data into s3://polygon-kinesis-fp/
+Reasons to use a firehose...
 ## Building a pipeline in Glue + ETL
+The first step of the pipeline was to run a Crawler. The Crawler (first_pass_polygon_crawler) parsed through the S3 bucket that the firehose was pointed at, s3://polygon-kinesis-fp/. It then returned the parsed data to the Athena database (fp_db_polygon_io) after adding a specified prefix (magsev_) to the table name. I now had a key table in the database.
+
+The Glue workflow then needed to run a series of jobs. The first of these (delete_parquet_polygon_table_s3_athena) was designed to find an existing table in the database, delete the parquet table (polygon_parquet_fp) 
 ## Designing a dashboard
 
 # Next Steps
