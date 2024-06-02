@@ -13,6 +13,7 @@ David delivered, and I learned the basics for how to develop a workflow in Glue 
 I elected to pull stock ticker data from Polygon.io and build a dashboard that presented the hourly varience in price of the "Magnificent 7" - the seven stocks that were accounting for approximately 30% of the S&P 500 as of Q1 2024, namely Apple, Microsoft, Alphabet, Amazon, Nvidia, Meta, and Tesla.
 
 # The Output
+![image](https://github.com/zachzazueta/aws_grafana_pipeline/assets/64451230/de80608f-605a-4761-8be5-d331fea1f203)
 
 # The Process
 ## Data sourcing
