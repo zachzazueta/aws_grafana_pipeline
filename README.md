@@ -1,7 +1,6 @@
 # AWS -> Grafana - my first cloud hosted data pipeline
 For this project, I worked through the process to get data from a raw API call, to become cleaned and structured data in an Athena database, and then queryied into a datamart to sit beneath a dashboard in Grafana.
 
-
 To dive into the world of data engineering, I recently completed a short course hosted by David Freitag - it was a great course with straightforward instruction, clear materials, and it provided me the skills to develop this basic project and the know-how to continue building upon it. I highly recommend David as an instructor - you can find his class here on Maven: https://maven.com/david-freitag/first-serverless-de-project.
 
 # The Objective
@@ -45,10 +44,14 @@ The final job was to write the parquet table to a Production folder (s3://parque
 
 Throughout the workflow, there were triggers between each of these steps, that would only allow the next step to run if the previous step succeded. If a step were to fail, I was able to access Error Logs in CLoudwatch to assess the problem.
 
+![image](https://github.com/zachzazueta/aws_grafana_pipeline/assets/64451230/061d7073-3fbb-4ebd-91c1-c8e31a454307)
+
 ## Designing a dashboard
 As mentioned above, we used Grafana, a web-based dashboard design tool, to create a user-friendly dashboard to get some use from our data.
 
 After creating an account, I was able to connect AWS Athena as a data source. I connected to the database (fp_db_polygon_io) and then pointed to the table (the newly published production table, specific to the latest timestamp of output) and then queried for the timestamp to be on the x-axis and the hourly variance to be on the y-axis. By selecting the data to be a timeseries, the graph split out the various tickers into their own distinct marks. I adjusted the "tooltip" to show the individual values when the user hovered over the chart.
+
+![image](https://github.com/zachzazueta/aws_grafana_pipeline/assets/64451230/b6de06b7-7ca6-4c29-af8b-872758c84f9a)
 
 # Next Steps
 The data viz is in an MVP state, and isn't delivering significant value to an end user at present - with some additional work, this is where I would take things:
