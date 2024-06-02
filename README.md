@@ -10,6 +10,9 @@ My goal was to gain familiarity with AWS and learn more about data engineering. 
 # The Outcome
 As stated above, David delivered quality instruction, and I learned the basics for how to develop a workflow in Glue that would ingest data from an API call with Lambdas and Kinesis Firehose, structure that data in S3, query it with Athena, run quality assurance checks, and write a production table back to an Athena database. We took it a step further and built out a dashboard to visualize this data in Grafana, therefore developing a fully fledged data pipeline.
 
+Here is a diagram of the steps taken in this project:
+![image](https://github.com/zachzazueta/aws_grafana_pipeline/assets/64451230/e21ed949-13f7-43e1-ac83-7f149a571498)
+
 I elected to pull stock ticker data from Polygon.io and build a dashboard that presented the hourly varience in price of the "Magnificent 7" - the seven stocks that were accounting for approximately 30% of the S&P 500 as of Q1 2024, namely Apple, Microsoft, Alphabet, Amazon, Nvidia, Meta, and Tesla.
 
 # The Output
@@ -25,6 +28,8 @@ The first step was to build a Lambda function that would dump data into a Kinesi
 Kinesis Firehoses are a great method to batch data ingestion, as it captures data from the source and writes it to S3. During this step, I wrote a Lambda function (Polygon_to_firehose). This function would call the API using a urllib3 request; the call would return data in json format, which I then parsed and generated a structured dictionary with the columns I wanted; each structured dictionary was added to an output string that was ultimately fed into the firehose put_record function as a structured data table.  The firehose dumped data into s3://polygon-kinesis-fp/.
 
 The free level of Polygon's service does limit the number of calls that can be made in a minute, and since I had to pull the data one ticker at a time, I introduced a lag function to the script used to call the API.
+
+If this pipeline were to become something I used regularly, or was part of a business process, I could use an EventBridge trigger to run this firehose at the top of the Glue workflow.
 
 ## Building a pipeline in Glue + ETL
 Once the data was in an S3 bucket, I was ready to further manipulate it. I would do this via a Glue Workflow, running a number of ETL jobs.
